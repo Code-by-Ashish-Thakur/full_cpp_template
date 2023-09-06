@@ -350,7 +350,31 @@ void UPDATE(ll index, ll low, ll high, ll idx, ll value, ll seg[])
     seg[index] = min(seg[2 * index + 1], seg[2 * index + 2]);
 }
 
+//................ DSU iIN GRAPH.................................
 
+ll par[10000000000]; 
+ll sz[100000000000];    
+void make_set(ll v) {
+    par[v]=v; 
+    sz[v]=1;
+}
+ll find_set(ll v) {
+    return (v==par[v])?v:par[v]=find_set(par[v]);
+}
+void union_sets(ll a, ll b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a == b) return;
+    if(sz[a]<sz[b]) swap(a,b);
+
+    par[b] = a;
+    sz[a]+=sz[b]; 
+    sz[b]=0; 
+}
+ll get_size(ll v){
+    return sz[find_set(v)];
+}
+   
 //---------------------------------- Binary Search in Array --------------------------------
 ll BinarySearch(ll arr[], ll st, ll ed, ll val)
 {
