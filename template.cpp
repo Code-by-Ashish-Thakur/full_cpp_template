@@ -352,28 +352,33 @@ void UPDATE(ll index, ll low, ll high, ll idx, ll value, ll seg[])
 
 //................ DSU iIN GRAPH.................................
 
-ll par[10000000000]; 
-ll sz[100000000000];    
-void make_set(ll v) {
-    par[v]=v; 
-    sz[v]=1;
+const int N = 1e3;
+int parent[N];
+int sz[N];
+void Make(int v)
+{
+    parent[v] = v;
+    sz[v] = 1;
 }
-ll find_set(ll v) {
-    return (v==par[v])?v:par[v]=find_set(par[v]);
+int Find(int v)
+{
+    if (parent[v] == v)
+        return v;
+    return parent[v] = Find(parent[v]);
 }
-void union_sets(ll a, ll b) {
-    a = find_set(a);
-    b = find_set(b);
-    if (a == b) return;
-    if(sz[a]<sz[b]) swap(a,b);
+void Union(int a, int b)
+{
+    a = Find(a);
+    b = Find(b);
+    if (a != b)
+    {
+        if (sz[a] < sz[b])
+            swap(a, b);
+        parent[b] = a;
+        sz[a] += sz[b];
+    }
+}
 
-    par[b] = a;
-    sz[a]+=sz[b]; 
-    sz[b]=0; 
-}
-ll get_size(ll v){
-    return sz[find_set(v)];
-}
    
 //---------------------------------- Binary Search in Array --------------------------------
 ll BinarySearch(ll arr[], ll st, ll ed, ll val)
