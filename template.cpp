@@ -22,8 +22,8 @@ using namespace std;
 #define ts to_string
 #define FIXED(kk) cout << fixed << setprecision(10) << kk
 
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 
 // -------------map unordered-map set unordered set ---------------important -----------------notes -----------
@@ -123,25 +123,28 @@ using namespace __gnu_pbds;
 
 #define PI 3.14159265
 #define endl "\n"
-#define boost ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define boost                    \
+    ios::sync_with_stdio(false); \
+    cin.tie(0);                  \
+    cout.tie(0);
 
 // //--------------------------nt fibonacci number -----------------------
-    ll fib(ll n){
-        ll MOD=1e9;
-      ll dp[n+1] = {0};
-       dp[1] = 1;
-       dp[2] = 1;
-       for(long long int i=3;i<=n;i++){
-           dp[i] = (dp[i-1]%(MOD))+(dp[i-2]%(MOD));
-       }
-       return (dp[n])%(MOD);
+ll fib(ll n)
+{
+    ll MOD = 1e9;
+    ll dp[n + 1] = {0};
+    dp[1] = 1;
+    dp[2] = 1;
+    for (long long int i = 3; i <= n; i++)
+    {
+        dp[i] = (dp[i - 1] % (MOD)) + (dp[i - 2] % (MOD));
     }
-
-
+    return (dp[n]) % (MOD);
+}
 
 bool isprime(int n)
 {
-    if(n<=1)
+    if (n <= 1)
         return false;
     for (int i = 2; i <= sqrt(n); i++)
         if (n % i == 0)
@@ -178,15 +181,19 @@ bool ispalindrome(string s)
 
 /* *******************  decimal to binary in log(n) *********************** */
 
-void BinaryToDecimal(ll n){
+void BinaryToDecimal(ll n)
+{
     string s;
-    while(n!=0){
-        if(n&1) s+="1";
-        else s+="0";
-        n>>=1;
+    while (n != 0)
+    {
+        if (n & 1)
+            s += "1";
+        else
+            s += "0";
+        n >>= 1;
     }
-  reverse(s.begin(),s.end());
-  cout<<s<<endl;
+    reverse(s.begin(), s.end());
+    cout << s << endl;
 }
 
 /*********************  binary to decimal in O(1)   *************************************/
@@ -260,7 +267,6 @@ ll MIN4(ll a, ll b, ll c, ll d)
     return min(a, min(b, min(c, d)));
 }
 
-
 /************************MERGE SORT********************************/
 void merge(int A[], int mid, int low, int high)
 {
@@ -299,14 +305,15 @@ void merge(int A[], int mid, int low, int high)
     {
         A[it] = B[it];
     }
-    
 }
-void mergeSort(int A[], int low, int high){
-    int mid; 
-    if(low<high){
-        mid = (low + high) /2;
+void mergeSort(int A[], int low, int high)
+{
+    int mid;
+    if (low < high)
+    {
+        mid = (low + high) / 2;
         mergeSort(A, low, mid);
-        mergeSort(A, mid+1, high);
+        mergeSort(A, mid + 1, high);
         merge(A, mid, low, high);
     }
 }
@@ -354,7 +361,7 @@ void BUILD(ll index, ll low, ll high, ll a[], ll seg[])
         seg[index] = a[low];
         return;
     }
-   int mid = low + (high - low) / 2;
+    int mid = low + (high - low) / 2;
 
     BUILD(2 * index + 1, low, mid, a, seg);
     BUILD(2 * index + 2, mid + 1, high, a, seg);
@@ -379,8 +386,8 @@ int QUERY(ll index, ll low, ll high, ll l, ll r, ll seg[])
 
     ll mid = low + (high - low) / 2;
 
-   ll left = QUERY(2 * index + 1, low, mid, l, r, seg);
-   ll right = QUERY(2 * index + 2, mid + 1, high, l, r, seg);
+    ll left = QUERY(2 * index + 1, low, mid, l, r, seg);
+    ll right = QUERY(2 * index + 2, mid + 1, high, l, r, seg);
 
     return min(left, right);
 }
@@ -395,8 +402,10 @@ void UPDATE(ll index, ll low, ll high, ll idx, ll value, ll seg[])
 
     ll mid = low + (high - low) / 2;
 
-    if(idx<=mid) UPDATE(2 * index + 1, low, mid, idx, value, seg);
-     else   UPDATE(2 * index + 2, mid + 1, high, idx, value, seg);
+    if (idx <= mid)
+        UPDATE(2 * index + 1, low, mid, idx, value, seg);
+    else
+        UPDATE(2 * index + 2, mid + 1, high, idx, value, seg);
 
     seg[index] = min(seg[2 * index + 1], seg[2 * index + 2]);
 }
@@ -430,36 +439,38 @@ void Union(int a, int b)
     }
 }
 
-   
 //---------------------------------- Binary Search in Array --------------------------------
 ll BinarySearch(ll arr[], ll st, ll ed, ll val)
 {
-    while (st <= ed) {
+    while (st <= ed)
+    {
         ll mid = st + (ed - st) / 2;
- 
+
         // Check if x is present at mid
         if (arr[mid] == val)
             return mid;
- 
+
         // If x greater, ignore left half
         if (arr[mid] < val)
-            st = mid+ 1;
- 
+            st = mid + 1;
+
         // If x is smaller, ignore right half
         else
-            ed = mid- 1;
+            ed = mid - 1;
     }
- 
+
     // If we reach here, then element was not present
     return -1;
 }
 
-#define tcT template<class T
-
+#define tcT template <class T
 
 // sort and remove duplicates
-tcT> void remDup(vector<T>& v) { 
-	sort(all(v)); v.erase(unique(all(v)),end(v)); }
+tcT > void remDup(vector<T> &v)
+{
+    sort(all(v));
+    v.erase(unique(all(v)), end(v));
+}
 
 /*****************************Print Fucntion here you can print easily from here **********************************/
 #define P(n) cout << n << endl;
@@ -468,25 +479,40 @@ tcT> void remDup(vector<T>& v) {
 #pragma GCC optimize("Ofast")
 #pragma GCC target("avx,avx2,fma")
 
+/*********************************PRINT vector using  cout */
+template <typename S>
+ostream &operator<<(ostream &os, const vector<S> &vector)
+{
+    for (auto x : vector)
+    {
+        os << x << " ";
+    }
+    return os;
+}
 
+/*********************************Take the input  vector using  cin*/
 
+template <typename T>
+istream &operator>>(istream &is, vector<T> &v)
+{
+    for (auto &i : v)
+        is >> i;
+    return is;
+}
 
 /********************My logical fuction start here ********** Please Read my question from here**********************************/
 
 void BUILD_LOGIC_HERE()
 {
-    
-CNI(n);
 
-VI a(n);
+    CNI(n);
 
-PUT(a,n);
+    VI a(n);
 
-//CNS(s);
+    PUT(a, n);
+
+    // CNS(s);
 }
-
-
-
 
 /* -------------my main function start here -----------------*/
 int main()
@@ -500,6 +526,15 @@ int main()
 
         BUILD_LOGIC_HERE();
     }
+    /*   *******************************************************************************************************************
 
+    Read the question very carefully
+    Check the constraint of the Question
+    Check the Constraint Limit
+    And also check the indexing
+    And think about the question
+
+     ******************************************************************************************************************************
+    */
     return 0;
 }
